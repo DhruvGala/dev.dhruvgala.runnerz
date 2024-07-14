@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Repository
 public class RunRepository {
@@ -14,6 +16,12 @@ public class RunRepository {
 
   List<Run> findAll() {
     return runs;
+  }
+
+  Optional<Run> findById(Integer id) {
+    return runs.stream()
+        .filter(run -> Objects.equals(run.id(), id))
+        .findFirst();
   }
 
   @PostConstruct
